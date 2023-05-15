@@ -13,32 +13,33 @@ public class Main {
         Scanner console = new Scanner(System.in);
         Scanner sc = new Scanner(new FileReader("input.txt"));
         System.out.println("Welcome! What can I interest you with?");
-        System.out.println("Available mode are: cracking, ciphering and deciphering");
-        while(true) {
+        System.out.println("Available mode are: \"crack\", \"ciphering\" and \"deciphering\"");
+        boolean shouldContinue = true;
+        while(shouldContinue) {
             String mode = console.nextLine();
-            if (mode.equals("crack")) {
-                new Cracker(sc.nextLine());
-                System.out.println("The result of cracking is in output.txt");
-                break;
-            } else {
-                if (mode.equals("decipher")) {
+            switch (mode) {
+                case "crack" -> {
+                    new Cracker(sc.nextLine());
+                    System.out.println("The result of cracking is in output.txt");
+                    shouldContinue = false;
+                }
+                case "decipher" -> {
                     System.out.println("Enter the key");
                     int key = Integer.parseInt(console.nextLine());
                     new Decipher(sc.nextLine(), key);
                     System.out.println("The result of deciphering is in output.txt");
-                    break;
-                } else {
-                    if (mode.equals("cipher")) {
-                        System.out.println("Enter the key");
-                        int key = Integer.parseInt(console.nextLine());
-                        new Cipher(sc.nextLine(), key);
-                        System.out.println("The result of ciphering is in output.txt");
-                        break;
-                    } else {
-                        System.out.println("No correct mode");
-                    }
+                    shouldContinue = false;
                 }
+                case "cipher"-> {
+                    System.out.println("Enter the key");
+                    int key = Integer.parseInt(console.nextLine());
+                    new Cipher(sc.nextLine(), key);
+                    System.out.println("The result of ciphering is in output.txt");
+                    shouldContinue = false;
+                }
+                default -> System.out.println("No correct mode");
             }
         }
     }
 }
+
