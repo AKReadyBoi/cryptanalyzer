@@ -37,7 +37,7 @@ public class Main {
                     System.out.println("The result of ciphering is in output.txt");
                     shouldContinue = false;
                 }
-                default -> System.out.println("No correct mode");
+                default -> System.out.println("No correct mode ");
             }
         }
     }
