@@ -14,7 +14,7 @@ public class Cipher {
     private static final String SYMBOLS = ".,\"\":-!? ";
 
     public Cipher(String text, int key) throws IOException {
-        File file = new File("output.txt");
+        File file = new File("encoded.txt");
         file.createNewFile();
         FileWriter writer = new FileWriter(file);
         writer.write(encryptWithShift(text, key)+"\n");

@@ -53,7 +53,7 @@ public class Main {
                                 break;
                             }
                             new Cipher(text, Integer.parseInt(key));
-                            System.out.println("The result of ciphering is in output.txt");
+                            System.out.println("The result of ciphering is in encoded.txt");
                             shouldContinue = false;
                             break;
                         } catch (Exception e) {
