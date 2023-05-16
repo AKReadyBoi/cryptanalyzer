@@ -57,7 +57,7 @@ public class Main {
                             shouldContinue = false;
                             break;
                         } catch (Exception e) {
-                            System.out.println("Enter a valid key ");
+                            System.out.println("Enter a valid key");
                         }
                     }
                 }
