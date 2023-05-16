@@ -13,29 +13,53 @@ public class Main {
         Scanner console = new Scanner(System.in);
         Scanner sc = new Scanner(new FileReader("input.txt"));
         System.out.println("Welcome! What can I interest you with?");
-        System.out.println("Available mode are: \"crack\", \"ciphering\" and \"deciphering\"");
+        System.out.println("Available mode are: \"crack\", \"cipher\" and \"decipher\"");
+        System.out.println("If you are doubting you can type \"back\" in cipher and decipher mode");
         boolean shouldContinue = true;
+        String text = sc.nextLine();
         while(shouldContinue) {
             String mode = console.nextLine();
             switch (mode) {
                 case "crack" -> {
-                    new Cracker(sc.nextLine());
+                    new Cracker(text);
                     System.out.println("The result of cracking is in output.txt");
                     shouldContinue = false;
                 }
                 case "decipher" -> {
                     System.out.println("Enter the key");
-                    int key = Integer.parseInt(console.nextLine());
-                    new Decipher(sc.nextLine(), key);
-                    System.out.println("The result of deciphering is in output.txt");
-                    shouldContinue = false;
+                    while(true) {
+                        try {
+                            String key = console.nextLine();
+                            if(key.equals("back")) {
+                                System.out.println("Available mode are: \"crack\", \"cipher\" and \"decipher\"");
+                                break;
+                            }
+                            new Decipher(text, Integer.parseInt(key));
+                            System.out.println("The result of deciphering is in output.txt");
+                            shouldContinue = false;
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Enter a valid key");
+                        }
+                    }
                 }
                 case "cipher"-> {
                     System.out.println("Enter the key");
-                    int key = Integer.parseInt(console.nextLine());
-                    new Cipher(sc.nextLine(), key);
-                    System.out.println("The result of ciphering is in output.txt");
-                    shouldContinue = false;
+                    while(true) {
+                        try {
+                            String key = console.nextLine();
+                            if(key.equals("back")) {
+                                System.out.println("Available mode are: \"crack\", \"cipher\" and \"decipher\"");
+                                break;
+                            }
+                            new Cipher(text, Integer.parseInt(key));
+                            System.out.println("The result of ciphering is in output.txt");
+                            shouldContinue = false;
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Enter a valid key");
+                        }
+                    }
                 }
                 default -> System.out.println("No correct mode");
             }
