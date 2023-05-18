@@ -4,6 +4,7 @@ import com.javarush.cryptanalyzer.ryabov.Cipher;
 import com.javarush.cryptanalyzer.ryabov.Cracker;
 import com.javarush.cryptanalyzer.ryabov.Decipher;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -11,17 +12,26 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner console = new Scanner(System.in);
-        Scanner sc = new Scanner(new FileReader("input.txt"));
+        Scanner input = new Scanner(new FileReader("input.txt"));
+        new File("encoded.txt").createNewFile();
+        Scanner encoded = new Scanner(new FileReader("encoded.txt"));
         System.out.println("Welcome! What can I interest you with?");
-        System.out.println("Available mode are: \"crack\", \"cipher\" and \"decipher\"");
+        System.out.println("Available modes are: \"crack\", \"cipher\" and \"decipher\"");
         System.out.println("If you are doubting you can type \"back\" in cipher and decipher mode");
         boolean shouldContinue = true;
-        String text = sc.nextLine();
+        String text = input.nextLine();
+        String encodedText=null;
+        try {
+            encodedText = encoded.nextLine();
+        }
+        catch (Exception e) {
+
+        }
         while(shouldContinue) {
             String mode = console.nextLine();
             switch (mode) {
                 case "crack" -> {
-                    new Cracker(text);
+                    new Cracker(encodedText);
                     System.out.println("The result of cracking is in output.txt");
                     shouldContinue = false;
                 }
@@ -31,10 +41,10 @@ public class Main {
                         try {
                             String key = console.nextLine();
                             if(key.equals("back")) {
-                                System.out.println("Available mode are: \"crack\", \"cipher\" and \"decipher\"");
+                                System.out.println("Available modes are: \"crack\", \"cipher\" and \"decipher\"");
                                 break;
                             }
-                            new Decipher(text, Integer.parseInt(key));
+                            new Decipher(encodedText, Integer.parseInt(key));
                             System.out.println("The result of deciphering is in output.txt");
                             shouldContinue = false;
                             break;
@@ -49,7 +59,7 @@ public class Main {
                         try {
                             String key = console.nextLine();
                             if(key.equals("back")) {
-                                System.out.println("Available mode are: \"crack\", \"cipher\" and \"decipher\"");
+                                System.out.println("Available modes are: \"crack\", \"cipher\" and \"decipher\"");
                                 break;
                             }
                             new Cipher(text, Integer.parseInt(key));

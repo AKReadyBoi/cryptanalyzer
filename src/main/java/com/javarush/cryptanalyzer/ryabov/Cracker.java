@@ -9,7 +9,7 @@ public class Cracker {
     private static final String RUSSIAN_ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     private static final String RUSSIAN_ALPHABET_LOWERCASE = RUSSIAN_ALPHABET.toLowerCase(Locale.ROOT);
     private static final String NUMBERS = "0123456789";
-    private static final String SYMBOLS = ".,\"\":-!? ";
+    private static final String SYMBOLS = "., ?!-:;()\"";
     private static final double[] RUSSIAN_FREQUENCIES = {0.075, 0.017, 0.046, 0.016, 0.03, 0.087, 0.087, 0.009, 0.018, 0.075, 0.012, 0.034, 0.042, 0.031, 0.065, 0.110, 0.028, 0.048, 0.055, 0.065, 0.025, 0.002, 0.011, 0.005, 0.015, 0.007, 0.004, 0.017, 0.017, 0.019, 0.003, 0.022, 0.022};
 
     public Cracker(String text) throws IOException {
@@ -60,7 +60,7 @@ public class Cracker {
                 } else {
                     if(SYMBOLS.contains(Character.toString(c))) {
                     int index = SYMBOLS.indexOf(c);
-                    int newIndex = (index - shift + 8) % 8;
+                    int newIndex = (index - shift + 11) % 11;
                     decryptedText.append(SYMBOLS.charAt(newIndex));
                 } else {
                         decryptedText.append(c);

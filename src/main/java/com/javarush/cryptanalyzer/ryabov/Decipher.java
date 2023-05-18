@@ -10,7 +10,7 @@ public class Decipher {
     private static final String RUSSIAN_ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     private static final String RUSSIAN_ALPHABET_LOWERCASE = RUSSIAN_ALPHABET.toLowerCase(Locale.ROOT);
     private static final String NUMBERS = "0123456789";
-    private static final String SYMBOLS = ".,\"\":-!? ";
+    private static final String SYMBOLS = "., ?!-:;()\"";
     public Decipher(String text, int key) throws IOException {
         File file = new File("output.txt");
         file.createNewFile();
@@ -40,7 +40,7 @@ public class Decipher {
                 } else {
                     if(SYMBOLS.contains(Character.toString(c))) {
                         int index = SYMBOLS.indexOf(c);
-                        int newIndex = (index - shift + 8) % 8;
+                        int newIndex = (index - shift + 11) % 11;
                         decryptedText.append(SYMBOLS.charAt(newIndex));
                     } else {
                         decryptedText.append(c);
