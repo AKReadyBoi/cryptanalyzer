@@ -7,6 +7,7 @@ import com.javarush.cryptanalyzer.ryabov.Decipher;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.spec.ECField;
 import java.util.*;
 
 public class Main {
@@ -31,9 +32,13 @@ public class Main {
             String mode = console.nextLine();
             switch (mode) {
                 case "crack" -> {
-                    new Cracker(encodedText);
-                    System.out.println("The result of cracking is in output.txt");
-                    shouldContinue = false;
+                        try {
+                            new Cracker(encodedText);
+                            System.out.println("The result of cracking is in output.txt");
+                            shouldContinue = false;
+                        } catch (Exception e) {
+                            System.out.println("Cipher a text before cracking");
+                        }
                 }
                 case "decipher" -> {
                     System.out.println("Enter the key");
