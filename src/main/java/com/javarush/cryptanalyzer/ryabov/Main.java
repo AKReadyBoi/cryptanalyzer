@@ -7,7 +7,6 @@ import com.javarush.cryptanalyzer.ryabov.Decipher;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.spec.ECField;
 import java.util.*;
 
 public class Main {
@@ -41,20 +40,24 @@ public class Main {
                         }
                 }
                 case "decipher" -> {
-                    System.out.println("Enter the key");
-                    while(true) {
-                        try {
-                            String key = console.nextLine();
-                            if(key.equals("back")) {
-                                System.out.println("Available modes are: \"crack\", \"cipher\" and \"decipher\"");
+                    if(encodedText==null) {
+                        System.out.println("Cipher a text before deciphering");
+                    } else {
+                        System.out.println("Enter the key");
+                        while (true) {
+                            try {
+                                String key = console.nextLine();
+                                if (key.equals("back")) {
+                                    System.out.println("Available modes are: \"crack\", \"cipher\" and \"decipher\"");
+                                    break;
+                                }
+                                new Decipher(encodedText, Integer.parseInt(key));
+                                System.out.println("The result of deciphering is in output.txt");
+                                shouldContinue = false;
                                 break;
+                            } catch (Exception e) {
+                                System.out.println("Enter a valid key");
                             }
-                            new Decipher(encodedText, Integer.parseInt(key));
-                            System.out.println("The result of deciphering is in output.txt");
-                            shouldContinue = false;
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Enter a valid key");
                         }
                     }
                 }
